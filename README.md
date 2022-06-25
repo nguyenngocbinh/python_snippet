@@ -16,7 +16,7 @@ python -m pip check
 pip freeze > requirements.txt
 ```
 
-
+## create with specify packages
 #### Create environment from jupyter notebook
 
 ```python
@@ -24,7 +24,54 @@ pip install ipykernel
 ipython kernel install --user --name=venv
 jupyter notebook
 ```
+
+# conda environment
+## create
+```python
+conda create -n python38 python=3.8.5 pip=20.2.4 ipykernel notebook
+conda activate python38
  
+conda create -n python36 python=3.6.8 pip=20.2.4 ipykernel notebook
+conda activate python36
+``
+ 
+
+## to remove conda environment
+```python
+conda deactivate
+conda env remove -n python36
+```
+
+## conda environment list
+```python
+conda info --env
+```
+ 
+
+## jupyter notebook environment
+#### create
+```python
+conda activate python38
+ipython kernel install --user --name=python38
+
+conda activate python36
+ipython kernel install --user --name=python36
+```
+ 
+
+#### remove (require run as administrator)
+
+```python
+jupyter kernelspec list
+jupyter kernelspec uninstall python36 
+```
+ 
+
+#### install pycaret
+
+```python
+pip install pycaret --use-feature=2020-resolver
+```
 
 #### install OFFLINE packages using requirements.txt 
 - Input requirements.txt in current directory contain like "jupyter-contrib-nbextensions==0.5.1"
