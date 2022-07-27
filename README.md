@@ -71,6 +71,12 @@ pip download -r requirements.txt -d wheel
 pip install -r requirements.txt --find-links=D:\wheel --no-index
 ```
 
+## 2.2. Install OFFLINE Linux package
+
+```
+pip download --platform manylinux1_x86_64 --only-binary=:all: --no-binary=:none: pandas
+```
+
 
 # 3. Install Extension for jupyter notebook
 
@@ -102,6 +108,7 @@ pip install pycaret --use-feature=2020-resolver
 # 5. Pandas
 
 #### clean names
+
 ```python
 X.columns = X.columns.str.translate("".maketrans({"[":"{", "]":"}","<":"^"}))
 ```
@@ -111,7 +118,11 @@ X.columns = X.columns.str.translate("".maketrans({"[":"{", "]":"}","<":"^"}))
 df['Cat Age'] = pd.cut(x=df['Age'], bins=[0, 25, 30, 35, 40, 45, 50, 75])
 ```
 
+#### groupby
 
+```
+df.groupby('target', group_keys=False).apply(lambda x: x.sample(frac=0.8))  
+```
 
 
 
