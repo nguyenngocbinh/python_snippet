@@ -125,7 +125,11 @@ df.groupby('target', group_keys=False).apply(lambda x: x.sample(frac=0.8))
 ```
 
 
+# Themes
 
+```
+jt -t onedork -fs 13 -altp -tfs 14 -nfs 14 -cellw 88% -T
+```
 
  
 
