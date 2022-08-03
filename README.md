@@ -73,6 +73,8 @@ pip install -r requirements.txt --find-links=D:\wheel --no-index
 
 ## 2.2. Install OFFLINE Linux package
 
+Activate same version python (i.e 3.7.0) and type command following
+
 ```
 pip download --platform manylinux1_x86_64 --only-binary=:all: --no-binary=:none: pandas
 ```
@@ -82,7 +84,7 @@ pip download --platform manylinux1_x86_64 --only-binary=:all: --no-binary=:none:
 
 - nbextension
 
-```python
+```
 pip install jupyter_contrib_nbextensions
 pip install jupyter_nbextensions_configurator
 jupyter contrib nbextension install --user
@@ -93,16 +95,22 @@ jupyter nbextensions_configurator enable --user
 
 #### check dependencies
 
-```python
+```
 python -m pip check 
 pip freeze > requirements.txt
 ```
 
 #### install pycaret
-```python
+
+```
 pip install pycaret --use-feature=2020-resolver
 ```
 
+#### Themes
+
+```
+jt -t onedork -fs 13 -altp -tfs 14 -nfs 14 -cellw 88% -T
+```
 
 
 # 5. Pandas
@@ -118,18 +126,61 @@ X.columns = X.columns.str.translate("".maketrans({"[":"{", "]":"}","<":"^"}))
 df['Cat Age'] = pd.cut(x=df['Age'], bins=[0, 25, 30, 35, 40, 45, 50, 75])
 ```
 
-#### groupby
+#### groupby stratify
 
-```
+```python
 df.groupby('target', group_keys=False).apply(lambda x: x.sample(frac=0.8))  
 ```
 
+#### read data
 
-# Themes
+```python
+appended_data = []
+for infile in glob.glob("*.xlsx"):
+    data = pandas.read_excel(infile)
+    # store DataFrame in list
+    appended_data.append(data)
 
+# Use pd.concat to merge a list of DataFrame into a single big DataFrame.
+appended_data = pd.concat(appended_data)
+appended_data = [df.set_index('ID') for df in appended_data]
+appended_data = pd.concat(appended_data)
 ```
-jt -t onedork -fs 13 -altp -tfs 14 -nfs 14 -cellw 88% -T
+
+#### reduce merge
+
+- `pandas.concat`
+
+```python
+dfs = [df0, df1, df2, ..., dfN]
+dfs = [df.set_index('name') for df in dfs]
+# cant not run if index not unique 
+dfs = pd.concat(dfs, join='outer', axis = 1) 
 ```
+
+
+- `functools.reduce`
+
+```python
+# still run with index not unique 
+import functools as ft
+df_final = ft.reduce(lambda left, right: pd.merge(left, right, on='name', how = 'outer'), dfs)
+```
+- `join`
+
+```python
+# cant not run if index not unique 
+dfs = [df.set_index('name') for df in dfs]
+dfs[0].join(dfs[1:], how = 'outer')
+```
+# 6. Files and folder
+
+```python
+list_files = glob.glob(".data/*.xlsx")
+```
+
+
+
 
  
 
