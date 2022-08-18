@@ -115,24 +115,31 @@ jt -t onedork -fs 13 -altp -tfs 14 -nfs 14 -cellw 88% -T
 
 # 5. Pandas
 
-#### clean names
+- clean names
 
 ```python
 X.columns = X.columns.str.translate("".maketrans({"[":"{", "]":"}","<":"^"}))
 ```
 
-#### binning
+- rename
+
+```python
+df.columns = df.columns.str.lower()
+```
+
+- binning
+
 ```python
 df['Cat Age'] = pd.cut(x=df['Age'], bins=[0, 25, 30, 35, 40, 45, 50, 75])
 ```
 
-#### groupby stratify
+- groupby stratify
 
 ```python
 df.groupby('target', group_keys=False).apply(lambda x: x.sample(frac=0.8))  
 ```
 
-#### read data
+- read data
 
 ```python
 appended_data = []
@@ -146,6 +153,38 @@ appended_data = pd.concat(appended_data)
 appended_data = [df.set_index('ID') for df in appended_data]
 appended_data = pd.concat(appended_data)
 ```
+
+- filter
+
+```python
+df[~df['name'].isin(list1)]
+df[df['name'].isna()]
+df[df['name'].notna()]
+```
+
+- convert
+
+```python
+# pd.to_numeric
+# pd.factorize
+# df['STRING'].astype(str)
+# pd.to_datetime(df['DATE'], format='%d%m%Y')
+```
+
+- Excel date
+
+```python
+import functools as ft
+fn_convert_date = ft.partial(xlrd.xldate_as_datetime, datemode=0)
+df['DATE'].apply(fn_convert_date).dt.year
+```
+- aggregate
+
+```python
+df = df.groupby('ID').agg('first')
+```
+
+# 6. Join
 
 #### reduce merge
 
@@ -173,12 +212,15 @@ df_final = ft.reduce(lambda left, right: pd.merge(left, right, on='name', how = 
 dfs = [df.set_index('name') for df in dfs]
 dfs[0].join(dfs[1:], how = 'outer')
 ```
-# 6. Files and folder
+# 7. Files and folder
 
 ```python
 list_files = glob.glob(".data/*.xlsx")
 ```
 
+# 99. Equivalent R
+
+- `functools` ~ `purrr`
 
 
 
