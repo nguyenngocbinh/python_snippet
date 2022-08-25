@@ -160,6 +160,10 @@ appended_data = pd.concat(appended_data)
 df[~df['name'].isin(list1)]
 df[df['name'].isna()]
 df[df['name'].notna()]
+
+#filter for rows where team name is not in one of several columns
+df[~df[['star_team', 'backup_team']].isin(values_list).any(axis=1)] 
+
 ```
 
 - convert
@@ -184,6 +188,24 @@ df['DATE'].apply(fn_convert_date).dt.year
 df = df.groupby('ID').agg('first')
 ```
 
+- date
+
+```python
+# difference of month
+df['nb_months'] = ((df.dates1 - df.dates2)/np.timedelta64(1, 'M'))
+df['nb_months'] = df['nb_months'].astype(int)
+# difference of day
+df['Number_of_days'] = ((df.dates1 - df.dates2)/np.timedelta64(1, 'D'))
+df['Number_of_days'] = df['Number_of_days'].astype(int)
+```
+
+- mapping 
+
+```python
+mapping = dict(zip(df[col],df['temp2']))
+temp_df[col] = temp_df[col].map(mapping)
+```
+
 # 6. Join
 
 #### reduce merge
@@ -192,8 +214,9 @@ df = df.groupby('ID').agg('first')
 
 ```python
 dfs = [df0, df1, df2, ..., dfN]
+# require set_index, not using key
 dfs = [df.set_index('name') for df in dfs]
-# cant not run if index not unique 
+# can't not run if index not unique 
 dfs = pd.concat(dfs, join='outer', axis = 1) 
 ```
 
@@ -203,7 +226,7 @@ dfs = pd.concat(dfs, join='outer', axis = 1)
 ```python
 # still run with index not unique 
 import functools as ft
-df_final = ft.reduce(lambda left, right: pd.merge(left, right, on='name', how = 'outer'), dfs)
+dfs = ft.reduce(lambda left, right: pd.merge(left, right, on='name', how = 'outer'), dfs)
 ```
 - `join`
 
@@ -216,6 +239,30 @@ dfs[0].join(dfs[1:], how = 'outer')
 
 ```python
 list_files = glob.glob(".data/*.xlsx")
+```
+
+# 8. List
+
+# Delete multiple elements from list python
+```python
+unwanted = [1, 3]
+for ele in sorted(unwanted, reverse = True):
+    del list1[ele]
+```
+
+# 9. Regex
+
+```python
+import re
+
+# Validate number
+number_pattern = "^\\d+$"
+re.match(number_pattern, '42') # Returns Match object
+re.match(number_pattern, 'notanumber') # Returns None
+
+# Extract number from a string
+number_extract_pattern = "\\d+"
+re.findall(number_extract_pattern, 'Your message was viewed 203 times.') # returns ['203']
 ```
 
 # 99. Equivalent R
