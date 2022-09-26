@@ -79,6 +79,11 @@ Activate same version python (i.e 3.7.0) and type command following
 pip download --platform manylinux1_x86_64 --only-binary=:all: --no-binary=:none: pandas
 ```
 
+## 2.3. Export requirements
+
+```
+pip list --format=freeze > requirements.txt
+```
 
 # 3. Install Extension for jupyter notebook
 
