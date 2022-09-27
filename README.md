@@ -211,6 +211,12 @@ mapping = dict(zip(df[col],df['temp2']))
 temp_df[col] = temp_df[col].map(mapping)
 ```
 
+- Apply to all values except missing
+
+```python
+s.apply(lambda a: a+2 if pd.notnull(a) else a)
+```
+
 # 6. Join
 
 #### reduce merge
