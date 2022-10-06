@@ -193,6 +193,22 @@ df['DATE'].apply(fn_convert_date).dt.year
 df = df.groupby('ID').agg('first')
 ```
 
+```python
+def fn_describe(df):
+    tbl = df.describe(include='all')
+    tbl.loc['dtype'] = df.dtypes
+    tbl.loc['total'] = len(df)
+    tbl.loc['%null'] = df.isnull().mean() * 100
+    tbl.loc['nbr.zero'] = (df == 0).sum(axis=1)
+    tbl.loc['%zero'] = (df == 0).sum(axis=1)/len(dat)    
+    tbl = tbl.T
+    tbl['nbr.null'] = tbl['total'] - tbl['count']
+    tbl['nbr.top'] = tbl['freq'] 
+    tbl['%top'] = tbl['freq']/tbl['total']*100
+    tbl = tbl[['dtype', 'total', 'nbr.null', '%null', 'nbr.zero', '%zero', 'mean', 'std', 'min', 'max', 'unique', 'top', 'nbr.top', '%top']]
+    return tbl
+```
+
 - date
 
 ```python
