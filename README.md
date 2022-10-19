@@ -6,9 +6,6 @@
 ```python
 conda create -n python38 python=3.8.5 pip=20.2.4 ipykernel notebook
 conda activate python38
- 
-conda create -n python36 python=3.6.8 pip=20.2.4 ipykernel notebook
-conda activate python36
 ```
 
 ### 1.1.2. Conda environment list
@@ -20,7 +17,7 @@ conda info --env
 
 ```python
 conda deactivate
-conda env remove -n python36
+conda env remove -n python38
 ```
 
 ### 1.1.4. Activate conda environment
@@ -37,9 +34,6 @@ conda activate python38
 ```python
 conda activate python38
 ipython kernel install --user --name=python38
-
-conda activate python36
-ipython kernel install --user --name=python36
 ```
  
 
@@ -47,7 +41,7 @@ ipython kernel install --user --name=python36
 
 ```python
 jupyter kernelspec list
-jupyter kernelspec uninstall python36 
+jupyter kernelspec uninstall python38 
 ```
 
 # 2. Install packages
@@ -112,6 +106,8 @@ pip install pycaret --use-feature=2020-resolver
 ```
 
 #### Themes
+
+- jupyter notebook
 
 ```
 jt -t onedork -fs 13 -altp -tfs 14 -nfs 14 -cellw 88% -T
@@ -292,15 +288,40 @@ number_extract_pattern = "\\d+"
 re.findall(number_extract_pattern, 'Your message was viewed 203 times.') # returns ['203']
 ```
 
+# 10. Database
+
+## Connect to database
+```python
+import pandas as pd
+import pyodbc
+import sqlalchemy as sa
+import urllib
+from sqlalchemy import create_engine, event
+from sqlalchemy.engine.url import URL
+
+server = 'VM-DC-JUMPSRV77\\IFRS9' 
+database = 'DATA' 
+username = 'username' 
+password = '@@@@@@' 
+    
+params = urllib.parse.quote_plus("DRIVER={SQL Server};"
+                                     "SERVER="+server+";"
+                                     "DATABASE="+database+";"
+                                     "UID="+username+";"
+                                     "PWD="+password+";")
+    
+engine = sa.create_engine("mssql+pyodbc:///?odbc_connect={}".format(params))
+```
+
+## Read/push table to database
+
+```python
+# read data
+df_test = pd.read_sql('SELECT top 5 * FROM b_tmp_cl020', engine)
+# push data
+df_test.to_sql('binh_test', engine, if_exists = 'append')
+```
+
 # 99. Equivalent R
 
 - `functools` ~ `purrr`
-
-
-
- 
-
-
-
-
-
