@@ -229,6 +229,16 @@ temp_df[col] = temp_df[col].map(mapping)
 s.apply(lambda a: a+2 if pd.notnull(a) else a)
 ```
 
+- to_excel
+
+```python
+pred_train.reset_index(inplace=True, drop=True)
+pred_test.reset_index(inplace=True, drop=True)
+with pd.ExcelWriter(product['t_pred']) as writer:
+    pred_train.to_excel(writer, sheet_name='pred_train')
+    pred_test.to_excel(writer, sheet_name='pred_test')    
+```
+
 # 6. Join
 
 #### reduce merge
