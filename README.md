@@ -331,6 +331,37 @@ df_test = pd.read_sql('SELECT top 5 * FROM b_tmp_cl020', engine)
 # push data
 df_test.to_sql('binh_test', engine, if_exists = 'append')
 ```
+# 11. Writing shorthand statements
+
+- lambda
+
+```python
+# lambda statement
+foo = lambda a: a+3
+foo(10)
+
+# Self called Lambda
+(lambda a: a+3)(8)
+```
+
+- List Comprehension
+
+```python
+[i for i in range(10) if i%2==0]
+```
+
+- Dict Comprehension
+
+```python
+mylist = ['MANGO', 'APPLE', 'ORANGE']
+d ={i.lower(): 2 for i in mylist}
+```
+
+- String Concatenation  with delimiter
+
+```python
+"_".join(["how", "are", "you"])
+```
 
 # 99. Equivalent R
 
