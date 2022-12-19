@@ -331,6 +331,22 @@ df_test = pd.read_sql('SELECT top 5 * FROM b_tmp_cl020', engine)
 # push data
 df_test.to_sql('binh_test', engine, if_exists = 'append')
 ```
+
+## sqlite3
+
+```python
+con = sqlite3.connect("data/mydata.sqlite")
+
+cur = con.cursor()
+
+# The result of a "cursor.execute" can be iterated over by row
+for row in cur.execute('SELECT * FROM tbl;'):
+    print(row)
+
+# Be sure to close the connection
+con.close()
+```
+
 # 11. Writing shorthand statements
 
 - lambda
