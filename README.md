@@ -139,7 +139,11 @@ df['Cat Age'] = pd.cut(x=df['Age'], bins=[0, 25, 30, 35, 40, 45, 50, 75])
 ```python
 df.groupby('target', group_keys=False).apply(lambda x: x.sample(frac=0.8))  
 ```
-
+- groupby partition (transform)
+```python
+df['new'] = df.groupby('group_var')['value_var'].transform('mean')
+df['new'] = df.groupby('group_var')['value_var'].transform(lambda x: some function)
+```
 - read data
 
 ```python
