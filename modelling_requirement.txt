@@ -1,0 +1,44 @@
+set https_proxy=10.1.33.23:8080
+set http_proxy=10.1.33.23:8080
+
+# tools
+conda install -c conda-forge ploomber
+conda install -c conda-forge radian
+conda install -c anaconda xlrd
+conda install -c conda-forge tqdm
+conda install -c anaconda pathlib
+conda install -c anaconda more-itertools
+
+# dump
+conda install -c anaconda joblib
+conda install -c conda-forge pickle5
+
+# Statistic
+conda install -c anaconda scipy
+conda install -c conda-forge scikit-misc
+conda install -c anaconda statsmodels
+
+# machine learning
+conda install -c conda-forge pycaret
+conda install -c conda-forge xgboost
+conda install -c conda-forge lightgbm
+
+
+# plot
+conda install -c anaconda seaborn
+conda install -c conda-forge plotnine
+
+
+# pip
+pip install optbinning
+pip install scorecardpy
+
+# database
+conda install -c anaconda sqlalchemy
+conda install -c conda-forge pyarrow
+conda install -c conda-forge fastparquet
+conda install -c anaconda openpyxl
+
+# datetime
+conda install -c trentonoliphant datetime
+
