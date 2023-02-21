@@ -3,9 +3,42 @@
 
 ### 1.1.1. Create conda environment
 
+- Create env by common command line
+
 ```python
 conda create -n python38 python=3.8.5 pip=20.2.4 ipykernel notebook
 conda activate python38
+```
+
+- Create env use `environment.yaml` file
+
+```
+name: env_ascore
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.8
+  - pandas==1.4.4  
+  - joblib==1.1.0
+  - statsmodels==0.13.2
+  - ipykernel
+  - zipp  
+  - pip
+  - pip: 
+    - optbinning==0.17.3
+    - ortools==9.4.1874
+# conda env create -f environment.yaml  
+# conda env remove -n env_ascore
+# set https_proxy=10.1.33.23:8080
+# set http_proxy=10.1.33.23:8080
+# conda install -n env_ascore ipykernel --update-deps --force-reinstall
+```
+
+- Create env use `requirements.txt` file
+
+```
+conda install --file requirements.txt
 ```
 
 ### 1.1.2. Conda environment list
