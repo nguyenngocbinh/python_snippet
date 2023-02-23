@@ -1,4 +1,5 @@
 # 1. Setup environment
+
 ## 1.1. Using **conda**
 
 ### 1.1.1. Create conda environment
@@ -38,22 +39,26 @@ dependencies:
 - Create env use `requirements.txt` file
 
 ```
+conda list --export > requirements.txt
 conda install --file requirements.txt
 ```
 
-### 1.1.2. Conda environment list
+### 1.1.2. Conda common commands
+
+-  Conda environment list
+
 ```python
 conda info --env
 ```
 
-### 1.1.3. Remove conda environment
+- Remove conda environment
 
 ```python
 conda deactivate
 conda env remove -n python38
 ```
 
-### 1.1.4. Activate conda environment
+- Activate conda environment
 
 ```python
 conda activate python38
@@ -264,6 +269,12 @@ temp_df[col] = temp_df[col].map(mapping)
 
 ```python
 s.apply(lambda a: a+2 if pd.notnull(a) else a)
+```
+
+- fillna
+
+```python
+dat['MOBILE'] = dat['MOBILE'].fillna(dat['MOBILE2'])
 ```
 
 - to_excel
