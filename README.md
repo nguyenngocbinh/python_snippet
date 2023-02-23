@@ -416,6 +416,23 @@ d ={i.lower(): 2 for i in mylist}
 "_".join(["how", "are", "you"])
 ```
 
+# 12. API
+
+### JSON file
+
+```python
+# Open JSON file    
+try:    
+    with open ('data/sample.json', "r") as f:   
+        data = json.load(f)
+except IOError:
+    print('cannot open file')  
+    
+# save
+with open('data/sample.json', 'w') as f:
+    json.dump(data, f)
+```
+
 # 99. Equivalent R
 
 - `functools` ~ `purrr`
