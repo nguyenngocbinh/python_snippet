@@ -1,0 +1,39 @@
+name: rdm
+channels:
+  - conda-forge
+dependencies:
+  - python=3.10.*  
+  - pandas   
+  # Visualize
+  - seaborn 
+  # workflow
+  - ploomber 
+  # Database
+  - pyodbc 
+  - fastparquet 
+  - sqlalchemy   
+  # modelling
+  - xgboost
+  - lightgbm
+  - pycaret
+  - statsmodels
+  - joblib
+  # Utilities
+  - unidecode
+  - xlrd 
+  - ipykernel
+  - zipp
+  - openpyxl
+  - pip
+  - pip: 
+    - optbinning==0.17.3
+    
+# conda env create -f environment.yaml  
+# conda env remove -n rdm
+# set https_proxy=10.1.33.23:8080
+# set http_proxy=10.1.33.23:8080
+# set https_proxy=10.1.33.11:8080
+# set http_proxy=10.1.33.11:8080
+# conda install -n env_ascore ipykernel --update-deps --force-reinstall
+# conda list --export > requirements.txt
+# create --name rdm --file requirements.txt
