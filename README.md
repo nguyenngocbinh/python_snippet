@@ -63,7 +63,11 @@ conda env remove -n python38
 ```python
 conda activate python38
 ```
+- Clean unused library
 
+```
+conda clean --all
+```
 
 ## 1.2. Create environment for jupyter notebook
 
