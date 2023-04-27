@@ -67,6 +67,7 @@ conda activate python38
 
 ```
 conda clean --all
+pip cache remove *
 ```
 
 ## 1.2. Create environment for jupyter notebook
@@ -157,6 +158,14 @@ jt -t onedork -fs 13 -altp -tfs 14 -nfs 14 -cellw 88% -T
 
 
 # 5. Pandas
+
+- case when
+
+```python
+df['new_column'] = np.where(df['col2']<9, 'value1',
+                   np.where(df['col2']<12, 'value2',
+                   np.where(df['col2']<15, 'value3', 'value4')))
+```
 
 - clean names
 
